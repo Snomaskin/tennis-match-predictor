@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winner Prediction and Player Stats Lookup</title>
+    <link rel="preload" as="image" href="tennis_court.jpg">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .background-container {
+            background-image: url('tennis_court.jpg'); 
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .overlay {
+            background-color: rgba(255, 255, 255, 0.7);
+            width: 350px; 
+            height: 560px; 
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative; 
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <body>
+        <div class="background-container">
+            <div class="overlay">
+                <div class="fixed-header">
+                    <h2>Tennis: Men's Singles</h2>
+                    <div class="radio-container">
+                        <input type="radio" id="predict_winner" name="form_selector" value="predict_winner" checked>
+                        <label for="predict_winner">Predict Winner</label>
+                        <input type="radio" id="lookup_stats" name="form_selector" value="lookup_stats">
+                        <label for="lookup_stats">Lookup Player Stats</label>
+                    </div>
+                </div>
+                <div class="content-container">
+                    <form id="form">
+                        <div id="winner-prediction-fields">
+                            <div class="input-container">
+                                <label for="player1">Player 1:</label>
+                                <input type="text" id="player1" placeholder="Start typing..." autocomplete="off" required="true">
+                                <span class="clear-button">X</span>
+
+                            </div>
+                            <div class="input-container">
+                                <label for="player2">Player 2:</label>
+                                <input type="text" id="player2" placeholder="Player format: 'Nadal R.'" autocomplete="off" required="true">
+                                <span class="clear-button">X</span>
+                            </div>
+                            <div class="input-container">
+                                <label for="court_surface">Court Surface:</label>
+                                <select id="court_surface">
+                                    <option value="Clay">Clay</option>
+                                    <option value="Grass">Grass</option>
+                                    <option value="Hard Court">Hard Court</option>
+                                </select>
+                            </div>
+                        
+                        </div>
+    
+                        <div id="player-stats-fields" style="display: none;">
+                            <div class="input-container">
+                                <label for="player_name">Player Name:</label>
+                                <input type="text" id="player_name" placeholder="Start typing..." autocomplete="off">
+                                <span class="clear-button">X</span>
+
+                            </div>
+                        </div>
+                        <div class="action-container">
+                            <button type="submit">Submit</button>
+                            <a href="https://github.com/Snomaskin/ATP-Winner-Predictor" target="_blank" class="github-icon">
+                                <img src="github-mark.png" alt="GitHub Repository" width="50" height="50">
+                            </a>
+                        </div>
+                    </form>
+
+                    <div class="speech-bubble" id="speechBubble">
+                        <div class="speech-bubble-content" id="speechBubbleContent"></div>
+                    </div>
+                    <div class="tennis-loader" id="tennisLoader">
+                        <div class="tennis-court">
+                            <div class="ball"></div>
+                        </div>
+                    </div>
+                    
+                    
+            </div>
+        </div>
+    <script src="init.js" type="module" defer> </script>
+</body>
+</html>
