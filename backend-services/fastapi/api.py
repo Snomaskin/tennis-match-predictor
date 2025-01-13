@@ -49,7 +49,7 @@ async def winner_prediction(request_data: PredictionRequest):
 @app.post("/lookup_player_stats")
 async def player_stats_lookup(request_data: StatsLookupRequest):
     try:
-        player_stats = app.state.handler.player_stats_lookup_request(request_data.player)
+        player_stats = app.state.handler.stats_lookup_request(request_data.player)
         return PlainTextResponse(player_stats)
     
     except ValueError as e:
@@ -59,4 +59,4 @@ async def player_stats_lookup(request_data: StatsLookupRequest):
 if __name__ == "__main__":
     import uvicorn
     #port = int(os.environ.get("PORT", 8000))
-    uvicorn.run("API:app", host="0.0.0.0", port=8080)
+    uvicorn.run("api:app", host="0.0.0.0", port=8080)

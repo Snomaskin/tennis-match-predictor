@@ -61,6 +61,7 @@ class ModelOperations:
         player_index = self.player_index_df[normalized_players == player_name_normalized]['Index'].values
         if len(player_index) == 0:
             raise ValueError(f"No match found for '{player_name}'. Please check spelling and input format.")
+        
         return player_index[0]
 
     def player_name_lookup(self, player_index: int) -> str:
@@ -70,13 +71,14 @@ class ModelOperations:
 
     def court_surface_index_lookup(self, surface_name: str) -> int:
         # Lookup court surface with its index value in 'court_surface_index.csv'.
-        surface_index_lookup = \
-            self.court_surface_index_df[self.court_surface_index_df['CourtSurface'] == surface_name]['Index'].values
-        if len(surface_index_lookup) == 0:
+        normalized_surface = surface_name.strip().lower()
+        normalized_surfaces = self.court_surface_index_df['CourtSurface'].str.strip().str.lower()
+        surface_index = self.court_surface_index_df[normalized_surfaces == normalized_surface]['Index'].values
+        if len(surface_index) == 0:
             raise ValueError(f"No match found for '{surface_name}'. Please check spelling and input format.")
         else:
 
-            return surface_index_lookup[0]
+            return surface_index[0]
         
     def court_surface_name_lookup(self, surface_index: int) -> str:
         surface_name_lookup = self.court_surface_index_df[self.court_surface_index_df['Index'] == surface_index]['CourtSurface'].values
@@ -174,7 +176,7 @@ class ApiRequestHandler(ModelOperations):
     def __init__(self):
         super().__init__()
         
-    def winner_prediction(self, player1_name: str, player2_name: str, court_surface: str) -> str:
+    def prediction_request(self, player1_name: str, player2_name: str, court_surface: str) -> str:
         player1_index = self.player_index_lookup(player1_name)
         player2_index = self.player_index_lookup(player2_name)
         court_surface_index = self.court_surface_index_lookup(court_surface)
@@ -183,7 +185,7 @@ class ApiRequestHandler(ModelOperations):
 
         return f"Predicted Winner: {predicted_winner_name}"
     
-    def stats_lookup(self, player_name:str) -> str:
+    def stats_lookup_request(self, player_name:str) -> str:
         player_index = self.player_index_lookup(player_name)
         total_wins = self.total_wins_lookup(player_index)
         nemesis = self.nemesis_lookup(player_index)
