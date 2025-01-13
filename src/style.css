@@ -1,0 +1,374 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    font-family: "Comic Sans MS", "Comic Sans", Arial, cursive;
+}
+
+.background-container {
+    background-image: url('/public/tennis_court.jpg'); 
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.overlay {
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 350px; 
+    height: 470px; 
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position:relative;
+}
+
+.content-wrapper {
+    padding: 10px;
+    flex-shrink: 0; 
+    text-align: center;
+  }
+
+.app-container, .main-content {
+width: 100%;
+}
+
+.radio-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 3%;
+    gap: 5px;
+}
+
+.radio-container input[type="radio"] {
+    margin-right: 5px;
+}
+
+.form-container {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    font-family: inherit;
+    font-style: inherit;
+    font-size: 13px;
+}
+
+.input-container {
+    margin-bottom: 15px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.input-container > div {
+    width: 65%;
+    position: relative;
+    padding-top: 5%;
+    padding-left: 4%;
+}
+.input-container label {
+    text-align: left;
+    width: 100%;
+    display: block;
+    padding-left: 3%;
+    padding-bottom: 0.5%;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+input[type="text"] {
+    height: 35px;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-style: inherit;
+}
+
+select {
+    height: 35px;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;  
+    -moz-appearance: none;     
+}
+
+select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 1em;
+    padding: 0 8px;
+    padding-right: 40px;
+
+}
+
+select:hover {
+    border-color: #999;
+}
+
+select:focus {
+    outline: none;
+    border-color: #666;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+select, select option {
+    font-size: 13px
+}
+select:invalid {
+    color: #999;
+    font-style: italic;
+}
+
+.clear-button {
+    position: absolute;
+    top: 75%;
+    transform: translateY(-50%);
+    right: -25px;
+    cursor: pointer;
+    color: #999;
+    font-weight: bold;
+    font-size: 12px;
+    display: flex;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+
+    /* Circle background */
+    background-color: rgba(255, 255, 0, 0.5);
+    border-radius: 50%; 
+    width: 20px; 
+    height: 20px; 
+    align-items: center;
+    justify-content: center;
+}
+
+.clear-button:hover {
+    background-color: rgba(255, 255, 0, 1); 
+}
+/*
+.input-container input:focus ~ .clear-button,
+.input-container input:not(:placeholder-shown):not(:placeholder-visible) ~ .clear-button {
+    display: flex;
+}
+*/
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+input::placeholder {
+    font-family: "Comic Sans MS", "Comic Sans", Arial, cursive;
+    color: rgba(0, 0, 0, 0.5); 
+    font-style: italic; 
+}
+input.invalid {
+    border: 1.5px solid red;
+    background-color: #fff0f0;
+    outline-color: red;
+    animation: invalidFade 0.3s ease-in-out; 
+}
+@keyframes invalidFade {
+    from {
+        background-color: white;
+    }
+    to {
+        background-color: #fff0f0;
+    }
+}
+
+#court_surface{
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.instructions {
+    margin-top: -15px;
+}
+
+.action-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1%;
+    margin-left: 4%;
+    position: relative;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+.prediction-container, .player-stats-container {
+    display: none;
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
+img {
+    margin-right: 10px;
+}
+
+.github-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 999;
+}
+/* Speech Bubble styles */
+.speech-bubble {
+    position: absolute;
+    bottom: 80px; 
+    right: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 250px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.speech-bubble:after {
+    content: '';
+    position: absolute;
+    bottom: -24px; 
+    right: 10px; 
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: #504c4c;
+}
+
+.tennis-loader {
+    position: absolute;
+    bottom: 80px;
+    right: 20px;
+    width: 120px;
+    height: 66px;
+    background: #4CAF50;
+    border-radius: 8px;
+    transform: translateZ(0);
+  }
+  .tennis-loader:after {
+    content: '';
+    position: absolute;
+    bottom: -23px; 
+    right: 20px; 
+    transform: translateX(50%); 
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: #504c4c; 
+  }
+
+  .tennis-court::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    height: 100%;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  .tennis-ball {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #FFEB3B;
+    border-radius: 50%;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    will-change: transform;
+    animation: tennis-bounce 2s linear infinite;
+  }
+  
+  @keyframes tennis-bounce {
+    0%, 100% {
+      left: 0;
+      top: calc(100% - 12px);  
+    }
+    50% {
+      left: calc(100% - 12px); 
+      top: 0;
+    }
+  }
+
+/* Player Suggestions styles */
+.suggestions-container {
+    display: none;
+    position: absolute;
+    width: 100%;
+}
+
+.suggestions-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    position: absolute; 
+    z-index: 1000;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.suggestions-item {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.suggestions-item:hover {
+    background-color: #f0f0f0;
+}
