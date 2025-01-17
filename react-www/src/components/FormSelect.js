@@ -29,7 +29,7 @@ export default function FormSelect({ inputs }) {
                 </div>)
             })}
         </div>
-        <FormDisplay selectedForm={selectedForm} />
+        <FormSetup selectedForm={selectedForm} />
     </>
     );
 }

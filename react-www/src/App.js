@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormSetup } from './components';
+import { FormSelect } from './components';
 import { INPUTS } from './config';
 import './style.css';
 
@@ -12,7 +12,7 @@ export default function App() {
             <h2>Tennis Match Predictor</h2>
               <div className="app-container">
                 <main className="main-content">
-                  <FormSetup inputs={ INPUTS }/>
+                  <FormSelect inputs={ INPUTS }/>
                 </main>
               </div>
           </div>

@@ -33,7 +33,9 @@ export default function  MessageBox ({ displayText, onDismiss, isLoading }) {
         return (
             <div className='speech-bubble'>
                 <div 
-                    className='speech-bubble-content' onClick={handleClick}>
+                    className='speech-bubble-content' 
+                    style={{ whiteSpace: 'pre-line' }} 
+                    onClick={handleClick}>
                     {displayText} 
                 </div>
             </div>
