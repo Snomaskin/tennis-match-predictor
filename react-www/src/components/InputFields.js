@@ -1,10 +1,7 @@
-import { useState } from "react";
 import SelectionMenu from "./SelectionMenu";
 import SuggestionsMenu from "./SuggestionsMenu";
 
-export default function InputFields({ fields, menuItems }) {
-    const [inputValues, setInputValues] = useState({})
-
+export default function InputFields({ fields, menuItems, inputValues, setInputValues }) {
     const handleInput = (e, fieldId) => {
         setInputValues(prev => ({
             ...prev,
