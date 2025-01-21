@@ -1,19 +1,14 @@
+import { useRef } from "react";
 import SelectionMenu from "./SelectionMenu";
 import SuggestionsMenu from "./SuggestionsMenu";
 
-export default function InputFields({ fields, menuItems, inputValues, setInputValues }) {
-    const handleInput = (e, fieldId) => {
-        setInputValues(prev => ({
-            ...prev,
-            [fieldId]: e ? e.target.value : ''
-        }));
-    }
+export default function InputFields({ fields, menuItems, formData, onInputChange }) {
+    const refs = useRef({});
 
-    const handleDirectInput = (fieldId, value) => {
-        setInputValues(prev => ({
-            ...prev,
-            [fieldId]: value || ''
-        }));
+    const handleInputChange = (fieldId, value) => {
+        // Beautiful:
+        const inputValue = value?.target?.value ?? value ?? '';
+        onInputChange(fieldId, inputValue);
     };
 
     return (
@@ -23,25 +18,28 @@ export default function InputFields({ fields, menuItems, inputValues, setInputVa
                     <label htmlFor={field.id}>{field.label}:</label>
                     <input
                         id={field.id}
+                        ref={el => refs.current[field.id] = el}
                         type="text" 
                         placeholder={index === 0 ? "Start typing..." : "Player format: 'Nadal R.'" }
                         autoComplete="off" 
                         required
-                        ref={field.ref}
-                        value={inputValues[field.id] || ''}
-                        onChange={(e) => handleInput(e, field.id)}
+                        value={formData[field.id]}
+                        onChange={(e) => handleInputChange(field.id, e)}
                     />
                     <ClearButton 
-                        inputRef={field.ref} 
-                        inputValue={inputValues[field.id]}
-                        onClear={() => handleInput(null, field.id)} 
+                        fieldId={field.id}
+                        inputValue={formData[field.id]}
+                        onClear={() => {
+                            handleInputChange(field.id, null);
+                            refs.current[field.id].focus();
+                        }} 
                     />
 
-                    {inputValues[field.id]?.length > 2  && (
+                    {formData[field.id]?.length > 2  && (
                         <SuggestionsMenu 
-                            searchTerm={inputValues[field.id]} 
+                            searchTerm={formData[field.id]} 
                             inputField={field.id}
-                            setInputFn={handleDirectInput}
+                            setInputFn={handleInputChange}
                         />
                     )}
                 </div>
@@ -51,7 +49,7 @@ export default function InputFields({ fields, menuItems, inputValues, setInputVa
     );
 }
 
-function ClearButton({ inputRef, inputValue, onClear }) {
+function ClearButton({ fieldId, inputValue, onClear }) {
     const buttonStyle = {
         opacity: inputValue ? 1 : 0,
         pointerEvents: inputValue ? 'auto' : 'none'
@@ -59,14 +57,12 @@ function ClearButton({ inputRef, inputValue, onClear }) {
 
     return (
         <span 
-        className="clear-button" 
-        style={buttonStyle}
-        onClick={() => {
-            inputRef.current.value = '';  // Clear DOM input
-            onClear();                    // Update React state
-            inputRef.current.focus();
-        }}>
-            {inputRef.current?.value && 'X'}
+            className="clear-button" 
+            style={buttonStyle}
+            onClick={() => {
+                onClear();
+            }}>
+                {fieldId && 'X'}
         </span>
     )
 }

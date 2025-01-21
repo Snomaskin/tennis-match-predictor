@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FormSetup from "./FormSetup";
 
 
-export default function FormSelect({ inputs }) {
+export default function FormSelect() {
     const radioSelect = [
         {id: 'predict_winner', value: 'predict_winner', label: 'Predict Winner'},
         {id: 'lookup_stats', value: 'lookup_stats', label: 'Lookup Stats'},
