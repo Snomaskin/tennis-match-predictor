@@ -1,4 +1,4 @@
-import { CONFIG } from '../config/config.js';
+import { CONFIG } from './config.js';
 import playerIndexCsv from '../assets/player_index_df.csv'
 
 

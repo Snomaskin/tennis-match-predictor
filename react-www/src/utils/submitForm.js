@@ -1,5 +1,5 @@
 import { ValidationUtils, RateLimiter } from './inputUtils.js';
-import { CONFIG } from '../config/config.js';
+import { CONFIG } from './config.js';
 
 
 export default function handleSubmit(inputs, endpoint) {

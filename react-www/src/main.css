@@ -1,6 +1,5 @@
 body, html {
     margin: 0;
-    padding: 0;
     height: 100%;
 }
 
@@ -9,12 +8,9 @@ body {
 }
 
 .background-container {
-    background-image: url('/public/tennis_court.jpg'); 
-    background-size: cover;
-    background-position: center;
+    background-image: url('./assets/tennis_court.jpg'); 
     min-height: 100vh;
     width: 100%;
-    position: relative;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -29,15 +25,11 @@ body {
     height: 470px; 
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
     position:relative;
 }
 
 .main-content {
     padding: 10px;
-    flex-shrink: 0; 
     text-align: center;
   }
 
