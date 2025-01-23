@@ -1,13 +1,14 @@
 import { useRef } from 'react';
-import ClearButton from './ClearButton';
+import { ClearButton } from "./";
 import SelectionMenu from './SelectionMenu';
 import SuggestionsMenu from './SuggestionsMenu';
+import './styles/input-container.css'
 
 
 export default function PredictionFormInputs ({ formData, onInputChange }) {
     const inputFields = [
-        { id: 'player1', label: 'Player 1', placeholder: "Start typing..." },
-        { id: 'player2', label: 'Player 2', placeholder: "Player format: 'Nadal R.'" },
+        { id: 'player1', label: 'Player 1:', placeholder: "Start typing..." },
+        { id: 'player2', label: 'Player 2:', placeholder: "Player format: 'Nadal R.'" },
     ];
     const menuItems = {
         id: 'court_surface',

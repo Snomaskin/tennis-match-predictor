@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { INPUTS } from "../config";
-import InputFields from "./InputFields";
 import MessageBox from './MessageBox'
 import handleSubmit from "../utils/submitForm";
+import PredictionFormInputs from "./PredictionFormInputs";
+import LookupFormInputs from "./LookupFormInputs";
+import './styles/button.css'
 
 
-export default function FormDisplay({ selectedForm }) {
+export default function FormSetup({ selectedForm }) {
     const [displayText, setDisplayText] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState({
@@ -14,8 +15,6 @@ export default function FormDisplay({ selectedForm }) {
         player: '',
         surface: ''
     });
-    //console.log('formData', formData)
-
 
     useEffect(() => {
         setFormData({
@@ -27,28 +26,14 @@ export default function FormDisplay({ selectedForm }) {
         setDisplayText(null);
     }, [selectedForm]);
 
-    let fields, menuItems;
-    if (selectedForm === "predict_winner"){
-        fields = [
-            {...INPUTS.predictWinner.fields[0]},
-            {...INPUTS.predictWinner.fields[1]}
-        ];
-        menuItems = {
-            ...INPUTS.predictWinner.selectionMenu,
-        id: 'surface'
-        };
-    } else if (selectedForm === "lookup_stats"){
-        fields = [
-            { ...INPUTS.lookupStats.fields[0]}
-        ];
-    }
-
     const handleInputChange = (id, value) => {
-        setFormData(prev => ({
-            ...prev,
-            [id]: value
+        const inputValue = value?.target?.value ?? value ?? '';
+
+        setFormData(formData => ({
+            ...formData,
+            [id]: inputValue
         }));
-    };
+    }
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -71,14 +56,25 @@ export default function FormDisplay({ selectedForm }) {
     };
 
     return (
-    <form className="form-container" onSubmit={onSubmit}>
-        <InputFields 
-            fields={fields} 
-            menuItems={menuItems} 
+    <form className="form-container" onSubmit={onSubmit} style={{padding: '20px'}}>
+        {selectedForm === "predict_winner" && 
+        <PredictionFormInputs
             formData={formData}
             onInputChange={handleInputChange}
-        />
-        <div className="action-container">
+        />}
+        {selectedForm === "lookup_stats" &&
+        <LookupFormInputs
+            formData={formData}
+            onInputChange={handleInputChange}
+        />}
+
+        <div className="action-container"
+            style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifContent: 'space-between',
+            }}
+        >
         <SubmitButton disabled={isSubmitting} />
             {(isSubmitting || displayText) && (
                 <MessageBox
@@ -95,7 +91,7 @@ export default function FormDisplay({ selectedForm }) {
 function SubmitButton({ disabled }) {
     return (
       <button 
-        className="submit-button"
+        className="button"
         type="submit"
         disabled={disabled}
       >

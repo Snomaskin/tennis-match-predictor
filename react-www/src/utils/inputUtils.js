@@ -1,4 +1,5 @@
 import { CONFIG } from '../config/config.js';
+import playerIndexCsv from '../assets/player_index_df.csv'
 
 
 export const DataUtils = {
@@ -6,10 +7,10 @@ export const DataUtils = {
      * @returns {Promise<Array<Object>>}
      */
     async loadCsvData() {
-        const PLAYERS_CSV_URL = CONFIG.DOCS.PLAYERS_DF;
+        //const PLAYERS_CSV_URL = CONFIG.DOCS.PLAYERS_DF;
 
         try {
-            const fetchCSV = await fetch(PLAYERS_CSV_URL);
+            const fetchCSV = await fetch(playerIndexCsv);
 
             const csvData = await fetchCSV.text();
             return this.parseCsvToJson(csvData);

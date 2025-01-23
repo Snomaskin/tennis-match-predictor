@@ -1,6 +1,6 @@
 export const CONFIG = {
     API: {
-        BASE_URL: "http://localhost:8080",
+        BASE_URL: "https://express-middleware-iywl5fy4ka-ez.a.run.app",
         TIMEOUT: 5000,
         CACHE_DURATION: 1000 * 60 * 5,
     },

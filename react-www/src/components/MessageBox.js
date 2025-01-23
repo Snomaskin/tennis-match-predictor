@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import './styles/loader.css'
+import './styles/speech-bubble.css'
 
 
 export default function  MessageBox ({ displayText, onDismiss, isLoading }) {

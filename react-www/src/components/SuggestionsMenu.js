@@ -1,4 +1,4 @@
-// import {CONFIG} from '../utils/config';
+import './styles/SuggestionsMenu.css'
 import { DataUtils } from '../utils/inputUtils';
 import { useState, useEffect } from 'react';
 
@@ -6,7 +6,7 @@ export default function SuggestionsMenu({ searchTerm, inputField, setInputFn }) 
     const [playersDb, setPlayersDb] = useState([]);
     const [matchingPlayers, setMatchingPlayers] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(true);
-
+    
     useEffect(() => {
         const loadData = async () => {
             try {

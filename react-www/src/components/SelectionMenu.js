@@ -1,16 +1,16 @@
 export default function SelectionMenu({ menuItems }) {
-    const {id, menuLabel, menuText, options, ref} = menuItems;
+    const {id, label, placeholder, options, ref} = menuItems;
 
     return (
         <div className="input-container">
-            <label htmlFor={id}>{menuLabel}</label>
+            <label htmlFor={id}>{label}</label>
             <select 
                 id={id} 
                 defaultValue="" 
                 required
                 ref={ref}
             >
-                <option value="" disabled>{menuText}</option>
+                <option value="" disabled selected>{placeholder}</option>
                 {options.map((option) => (
                     <option 
                         key={option.id} 
