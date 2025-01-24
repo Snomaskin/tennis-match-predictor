@@ -10,7 +10,9 @@ export default function SelectionMenu({ menuItems }) {
                 required
                 ref={ref}
             >
-                <option value="" disabled selected>{placeholder}</option>
+                <option value="" disabled>
+                    {placeholder}
+                </option>
                 {options.map((option) => (
                     <option 
                         key={option.id} 
@@ -21,5 +23,6 @@ export default function SelectionMenu({ menuItems }) {
                 ))}
             </select>
         </div>
-    )
+    );
+    
 }

@@ -44,13 +44,11 @@ export default function PredictionFormInputs ({ formData, onInputChange }) {
                             refs.current[field.id].focus();
                         }}
                     />
-                    {formData[field.id].length > 2 && (
-                        <SuggestionsMenu
-                            searchTerm={formData[field.id]}  
-                            inputField={field.id}  
-                            setInputFn={onInputChange}
-                        />
-                    )}
+                    <SuggestionsMenu
+                        searchTerm={formData[field.id]}  
+                        inputField={field.id}  
+                        setInputFn={onInputChange}
+                    />           
                 </div>
             ))}
             <SelectionMenu menuItems={menuItems}/>

@@ -7,11 +7,8 @@ export const DataUtils = {
      * @returns {Promise<Array<Object>>}
      */
     async loadCsvData() {
-        //const PLAYERS_CSV_URL = CONFIG.DOCS.PLAYERS_DF;
-
         try {
             const fetchCSV = await fetch(playerIndexCsv);
-
             const csvData = await fetchCSV.text();
             return this.parseCsvToJson(csvData);
         } catch (error) {
@@ -38,6 +35,7 @@ export const DataUtils = {
         });
     }
 }
+
 export const ValidationUtils = {
     _validationCallbacks: {}, // inputFieldId -> callbackFunction
 

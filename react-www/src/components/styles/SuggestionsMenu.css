@@ -13,10 +13,14 @@
 }
 
 .suggestions-item {
-    padding: 8px 12px;
+    padding: 7px;
     cursor: pointer;
 }
 
 .suggestions-item:hover {
     background-color: #f0f0f0;
+}
+
+.player-name {
+    font-size: 13px;
 }

@@ -26,8 +26,8 @@ export default function FormSetup({ selectedForm }) {
         setDisplayText(null);
     }, [selectedForm]);
 
-    const handleInputChange = (id, value) => {
-        const inputValue = value?.target?.value ?? value ?? '';
+    const handleInputChange = (id, e) => {
+        const inputValue = e?.target?.value ?? e ?? '';
 
         setFormData(formData => ({
             ...formData,

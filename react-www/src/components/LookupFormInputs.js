@@ -10,7 +10,7 @@ export default function LookupFormInputs ({ formData, onInputChange }) {
 
     return (
         <div className="input-container" key={field.id}>
-            <div >
+            <div>
                 <label htmlFor={field.id}>{field.label}</label>
                 <input 
                     id={field.id}
