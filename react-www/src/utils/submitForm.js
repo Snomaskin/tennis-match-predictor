@@ -46,10 +46,9 @@ function predictWinner(player1, player2, courtSurface) {
 function lookupPlayerStats(player) {
     try {
     const formData = {
-        player: ValidationUtils.formatPlayerName(player, "player_name", "Player Name")
+        player: ValidationUtils.formatPlayerName(player, "player", "Player")
     };
     const jsonData = JSON.stringify(formData);
-
     const returnString = fetchData(CONFIG.ENDPOINTS.LOOKUP_STATS, jsonData)
         
     return returnString

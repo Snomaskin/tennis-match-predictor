@@ -1,11 +1,10 @@
-import { useRef } from 'react';
 import { ClearButton } from "./";
 import SelectionMenu from './SelectionMenu';
 import SuggestionsMenu from './SuggestionsMenu';
 import './styles/input-container.css'
 
 
-export default function PredictionFormInputs ({ formData, onInputChange }) {
+export default function PredictionFormInputs ({ formData, refs, isValid, onInputChange }) {
     const inputFields = [
         { id: 'player1', label: 'Player 1:', placeholder: "Start typing..." },
         { id: 'player2', label: 'Player 2:', placeholder: "Player format: 'Nadal R.'" },
@@ -20,7 +19,6 @@ export default function PredictionFormInputs ({ formData, onInputChange }) {
             { id: 'hardCourt', label: 'Hard Court' },
         ],
     }
-    const refs = useRef({})
 
     return (
         <div className="input-container">
@@ -36,6 +34,7 @@ export default function PredictionFormInputs ({ formData, onInputChange }) {
                         required
                         value={formData[field.id]}
                         onChange={(e) => onInputChange(field.id, e)}
+                        className={isValid[field.id] === false ? 'invalid' : ''}
                     />
                     <ClearButton
                         inputValue={formData[field.id]}
@@ -51,7 +50,10 @@ export default function PredictionFormInputs ({ formData, onInputChange }) {
                     />           
                 </div>
             ))}
-            <SelectionMenu menuItems={menuItems}/>
+            <SelectionMenu 
+                menuItems={menuItems}
+                setInputFn={onInputChange}    
+            />
 
         </div>
     )

@@ -1,12 +1,10 @@
-import { useRef } from "react";
 import { ClearButton } from "./";
 import SuggestionsMenu from "./SuggestionsMenu";
 import './styles/input-container.css'
 
 
-export default function LookupFormInputs ({ formData, onInputChange }) {
+export default function LookupFormInputs ({ formData, refs, isValid, onInputChange }) {
     const field = { id: 'player', label: 'Player:', placeholder: "Start typing..." };
-    const ref = useRef({})
 
     return (
         <div className="input-container" key={field.id}>
@@ -14,19 +12,21 @@ export default function LookupFormInputs ({ formData, onInputChange }) {
                 <label htmlFor={field.id}>{field.label}</label>
                 <input 
                     id={field.id}
-                    ref={(e) => ref.current[field.id] = e}
+                    ref={(e) => refs.current[field.id] = e}
                     placeholder={field.placeholder}
                     autoComplete="off"
                     type="text"
                     required
                     value={formData[field.id]}
                     onChange={(e) => onInputChange(field.id, e)}
+                    className={isValid[field.id] === false ? 'invalid' : ''}
+
                 />
                 <ClearButton
                     inputValue={formData[field.id]}
                     onClear={() =>{
                         onInputChange(field.id, null);
-                        ref.current[field.id].focus();
+                        refs.current[field.id].focus();
                     }}
                 /> 
                 <SuggestionsMenu 

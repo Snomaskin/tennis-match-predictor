@@ -37,8 +37,6 @@ export const DataUtils = {
 }
 
 export const ValidationUtils = {
-    _validationCallbacks: {}, // inputFieldId -> callbackFunction
-
     /**
      * Formats a player's name as "LastName FirstInitial."
      * @param {string} name 
@@ -73,26 +71,6 @@ export const ValidationUtils = {
                 name.includes(' ') && 
                 CONFIG.VALIDATION.NAME_REGEX.test(name);
     },
-
-    registerValidationCallback(inputFieldId, callback) {
-        this._validationCallbacks [inputFieldId] = callback;
-    },
-
-    /**
-     * 
-     * @param {boolean} isValid 
-     * @param {string} inputFieldId 
-     * @param {string} displayString 
-     */
-    executeValidationCallback(isValid, inputFieldId, displayString) {
-        this._validationCallbacks[inputFieldId]?.(isValid);
-
-        if (!isValid) {
-            const clientError = new Error(`Invalid input for "${displayString}". Please follow the name format instructions.`);
-            clientError.isClientError = true;
-            throw clientError;
-        }
-    }
 }
 
 export const RateLimiter = {

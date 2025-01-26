@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import MessageBox from './MessageBox'
 import handleSubmit from "../utils/submitForm";
 import PredictionFormInputs from "./PredictionFormInputs";
 import LookupFormInputs from "./LookupFormInputs";
+import { ValidationUtils } from '../utils/inputUtils';
 import './styles/button.css'
 
 
@@ -13,17 +14,20 @@ export default function FormSetup({ selectedForm }) {
         player1: '',
         player2: '',
         player: '',
-        surface: ''
+        court_surface: ''
     });
+    const [isValid, setIsValid] = useState({})
+    const refs = useRef({});
 
     useEffect(() => {
         setFormData({
             player1: '',
             player2: '',
             player: '',
-            surface: ''
+            court_surface: ''
         });
         setDisplayText(null);
+        setIsValid({});
     }, [selectedForm]);
 
     const handleInputChange = (id, e) => {
@@ -35,17 +39,34 @@ export default function FormSetup({ selectedForm }) {
         }));
     }
 
+    const validateInput = (id, value) => {
+        const isValid = ValidationUtils.canFormatAsPlayerName(value);
+        if (!isValid) {
+            setIsValid((prev) => ({
+                ...prev, [id]: false
+            }))
+            return false
+        } else if (isValid) {
+            setIsValid((prev) => ({
+                ...prev, [id]: true
+            }))
+            return true
+        }
+    }
+
     const onSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
         setDisplayText(null); 
-
         try {
+            Object.keys(formData).map(key => {
+                if (formData[key] === '') return;
+                return validateInput(key, formData[key])});
             const result = await handleSubmit(formData, selectedForm);
             setDisplayText(result)
         } catch (error) {
-            console.log('Submit error', error);
-            setDisplayText('Error: Believe it.');
+            console.log(error);
+            setDisplayText(error.message);
         } finally {
             setIsSubmitting(false);
         }
@@ -60,11 +81,15 @@ export default function FormSetup({ selectedForm }) {
         {selectedForm === "predict_winner" && 
         <PredictionFormInputs
             formData={formData}
+            refs={refs}
+            isValid={isValid}
             onInputChange={handleInputChange}
         />}
         {selectedForm === "lookup_stats" &&
         <LookupFormInputs
             formData={formData}
+            refs={refs}
+            isValid={isValid}
             onInputChange={handleInputChange}
         />}
 

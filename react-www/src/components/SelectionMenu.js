@@ -1,4 +1,4 @@
-export default function SelectionMenu({ menuItems }) {
+export default function SelectionMenu({ menuItems, setInputFn }) {
     const {id, label, placeholder, options, ref} = menuItems;
 
     return (
@@ -9,6 +9,7 @@ export default function SelectionMenu({ menuItems }) {
                 defaultValue="" 
                 required
                 ref={ref}
+                onChange={(e) => setInputFn(e.target.id, e)}
             >
                 <option value="" disabled>
                     {placeholder}
