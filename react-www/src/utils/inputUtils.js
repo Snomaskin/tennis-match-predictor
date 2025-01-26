@@ -45,10 +45,10 @@ export const ValidationUtils = {
      * @returns {string} formattedPlayerName
      * @throws {Error} clientError
      */
-    formatPlayerName(name, inputFieldId, displayString) {
+    formatPlayerName(name) {
         const isValid = this.canFormatAsPlayerName(name);
-        this.executeValidationCallback(isValid, inputFieldId, displayString);
 
+        if (isValid) {
         return name.trim().split(' ')
             .map((part, index, arr) => {
                 // Format FirstInitial.
@@ -59,13 +59,16 @@ export const ValidationUtils = {
                 return part.charAt(0).toUpperCase() + part.slice(1).toLowerCase();
             })
             .join(' ');
+        } else { 
+            throw new Error(`'${name}' is not a valid input. Please check spelling and format or use a player from the suggestions.`)
+        }
     },
 
     /**
      * 
      * @param {string} name 
      * @returns {boolean} isValid
-     */
+     */ 
     canFormatAsPlayerName(name) {
         return  name.trim().length >= 3 &&
                 name.includes(' ') && 
